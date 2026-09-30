@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Jewellery Studio — Image to 3D</title>
+  <meta name="description" content="Turn a jewellery photograph into an interactive 3D preview.">
+  <link rel="stylesheet" href="/style.css">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <header><a href="/" class="brand"><span class="mark">◇</span> JEWELLERY STUDIO</a><div class="header-right"><select id="past-projects"><option value="">Past projects</option></select><span class="badge">IMAGE TO 3D · POC</span></div></header>
+  <main>
+    <div class="intro"><p class="eyebrow">A NEW PERSPECTIVE</p><h1>From photograph to form.</h1><p>One photo. Two generated 3D models: realistic and pencil sketch.</p></div>
+    <div class="workspace">
+      <section class="panel input-panel" aria-labelledby="input-title">
+        <div class="panel-heading"><h2 id="input-title"><span>01</span> Your image</h2><span>JPG, PNG, WEBP</span></div>
+        <label class="dropzone" id="dropzone" for="image-input">
+          <input id="image-input" type="file" accept="image/jpeg,image/png,image/webp">
+          <img id="preview" alt="Selected jewellery" hidden>
+          <div id="upload-prompt"><span class="upload-icon">＋</span><strong>Choose a jewellery photo</strong><p>or drop it here</p><small>Up to 10 MB</small></div>
+        </label>
+        <div class="file-line"><span id="filename">No image selected</span><button id="change" class="text-button" hidden>Change image</button></div>
+        <p class="tip">For the best result, use one piece of jewellery on a clean background.</p>
+        <p class="tip" id="provider-note">Free Hugging Face demo · Shared queue and daily limits.</p>
+        <a class="text-button" href="https://huggingface.co/spaces/microsoft/TRELLIS.2" target="_blank" rel="noopener noreferrer">Open official demo ↗</a>
+        <p></p>
+        <button id="generate" class="primary" disabled>Generate both 3D models <span>↗</span></button>
+      </section>
+      <section class="panel output-panel" aria-labelledby="output-title">
+        <div class="panel-heading"><h2 id="output-title"><span>02</span> 3D output</h2><span id="state-label">AWAITING IMAGE</span></div>
+        <div id="viewer">
+          <div id="empty"><div class="empty-symbol">◇</div><h3>Your jewellery, from every angle.</h3><p>Your generated model will appear here.</p></div>
+          <div id="loading" hidden><div class="spinner"></div><strong id="loading-text">Preparing your image…</strong><p>This can take a few minutes.</p></div>
+        </div>
+        <div class="viewer-footer"><span>Drag to rotate · Scroll to zoom</span><div><button id="sketch-toggle" class="text-button" disabled>Show sketch 3D</button><button id="retry-sketch" class="text-button" hidden>Retry sketch</button><button id="reset" class="text-button" disabled>Reset view</button><a id="download" hidden download="jewellery.glb">Realistic GLB ↓</a><a id="download-sketch" hidden download="jewellery-sketch.glb">Sketch GLB</a></div></div>
+      </section>
+    </div>
+    <p id="message" role="status" aria-live="polite"></p>
+    <footer><span>Powered by Qwen Image Edit + TRELLIS.2</span><span>Separately generated models may differ in shape. Sketch appearance is experimental.</span></footer>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
